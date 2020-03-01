@@ -134,6 +134,7 @@ class Base:
         self.x2 = self.WIDTH
 
     def move(self):
+        # swapping the first and second bg image continously
         self.x1 -= self.VEL
         self.x2 -= self.VEL
 
@@ -144,7 +145,9 @@ class Base:
             self.x2 = self.x2 + self.WIDTH
 
 
-
+    def draw(self, win):
+        win.blit(self.img, (self.x1, self.y))
+        win.blit(self.img, (self.x2, self.y))
 
 
 def draw_window(win, bird):
