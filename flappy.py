@@ -36,7 +36,7 @@ class Bird:
     def jump(self):
         self.vel = -8.5
         self.tick_count = 0
-        self.height = self.y 
+        self.height = self.y  # savinng current height
 
     def move(self): # move every single frame
         self.tick_count += 1 
@@ -88,7 +88,7 @@ class Bird:
 
 class Pipe:
     GAP = 200
-    VEL = 15
+    VEL = 10
 
     def __init__(self, x):
         self.x = x
@@ -149,7 +149,7 @@ class Base:
             self.x1 = self.x2 + self.WIDTH
 
         if self.x2 + self.WIDTH < 0:
-            self.x2 = self.x2 + self.WIDTH
+            self.x2 = self.x1 + self.WIDTH
 
 
     def draw(self, win):
@@ -157,7 +157,7 @@ class Base:
         win.blit(self.IMG, (self.x2, self.y))
 
 
-def draw_window(win, birds, pipes, base, score, gen):
+def draw_window(win, birds, pipes, base, score, gen, alive):
     win.blit(BG_IMG, (0, 0))
     for pipe in pipes:
         pipe.draw(win)
@@ -167,6 +167,8 @@ def draw_window(win, birds, pipes, base, score, gen):
 
     text = STAT_FONT.render("Gen: " + str(gen), 1, (255, 255, 255))
     win.blit(text, (10 , 10))
+    text = STAT_FONT.render("Alive: " + str(alive), 1, (255, 255, 255))
+    win.blit(text, (10 , 40))
     base.draw(win)
     for bird in birds:
         bird.draw(win)
@@ -258,7 +260,8 @@ def main(genomes, config):
                 
 
         base.move()
-        draw_window(win, birds, pipes, base, score, GEN)
+        alive = len(birds)
+        draw_window(win, birds, pipes, base, score, GEN, alive)
 
 
 
