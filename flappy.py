@@ -174,7 +174,7 @@ def draw_window(win, birds, pipes, base, score, gen, alive):
         bird.draw(win)
     pygame.display.update()
 
-def main(genomes, config):
+def loop(genomes, config):
     global GEN
     GEN += 1
     nets = []
@@ -275,7 +275,7 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
-    winner = p.run(main , 50)    
+    winner = p.run(loop , 50)    
 
 
 if __name__ == "__main__":
